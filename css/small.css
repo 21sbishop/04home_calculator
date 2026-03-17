@@ -1,0 +1,421 @@
+/* Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.  */
+html {-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
+
+/*  apply a natural box layout model to all elements  */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/* ============================================================
+   CUSTOM STYLES — small.css
+   Mobile-first base styles (all screen sizes)
+   Home Improvement Calculator — Unit04
+   ============================================================ */
+
+/* ── CSS Custom Properties ─────────────────────────────── */
+:root {
+  /* Clean, professional palette — slate navy + white */
+  --color-bg:          #f0f2f5;
+  --color-surface:     #ffffff;
+  --color-border:      #e2e6ea;
+  --color-border-focus:#3a6fd8;
+  --color-primary:     #1a2e4a;    /* deep navy */
+  --color-primary-dk:  #0f1e32;
+  --color-accent:      #3a6fd8;    /* clear blue */
+  --color-accent-lt:   #eef2fc;
+  --color-text:        #1a2e4a;
+  --color-muted:       #6b7a8d;
+  --color-success:     #1e6b45;    /* result value green */
+  --color-success-lt:  #eaf4ee;
+
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  --space-xs: 0.375rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-card: 0 1px 4px rgba(26,46,74,0.07), 0 4px 16px rgba(26,46,74,0.06);
+  --shadow-btn:  0 2px 8px rgba(58,111,216,0.30);
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* ── Site Header ───────────────────────────────────────── */
+/* HIERARCHY & CONTRAST: Deep navy header anchors the page and establishes brand */
+.site-header {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 1.75rem var(--space-md);
+  border-bottom: 3px solid var(--color-accent);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
+/* HIERARCHY: h1 is the largest, boldest text element on the page */
+.header-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 4.5vw, 2rem);
+  font-weight: 400;
+  margin: 0 0 0.15em;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+/* HIERARCHY: tagline is clearly subordinate — smaller, lighter, uppercase */
+.header-tagline {
+  font-size: 0.75rem;
+  margin: 0;
+  opacity: 0.55;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Main Layout ───────────────────────────────────────── */
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Cards ─────────────────────────────────────────────── */
+/* PROXIMITY: white card groups related inputs/outputs together */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* ── Section Headings ──────────────────────────────────── */
+/* HIERARCHY: h2 in display font sits above all form/result content */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--color-primary);
+  margin: 0 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* WAYFINDING: numbered step badges orient the user left-to-right through the app */
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--color-accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+
+/* ── Form Grid — single column on mobile ───────────────── */
+/* ALIGNMENT: all fields share the same left edge and width */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Form Groups ───────────────────────────────────────── */
+/* PROXIMITY: label sits 5px above its field — clearly paired */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* HIERARCHY: labels are smaller and muted — inputs are dominant */
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ── Number Inputs ─────────────────────────────────────── */
+.input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  overflow: hidden;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.input-wrap:focus-within {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(58,111,216,0.12);
+}
+
+.input-wrap input[type="number"] {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.7rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.975rem;
+  color: var(--color-text);
+  outline: none;
+  width: 100%;
+}
+
+/* CONTRAST: unit tag uses accent background to distinguish it from the input field */
+.unit {
+  padding: 0 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  background: var(--color-accent-lt);
+  border-left: 1px solid var(--color-border);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* ── Select ────────────────────────────────────────────── */
+.select-wrap {
+  position: relative;
+}
+
+/* VISUAL TANGENT: custom select removes OS chrome so it matches the rest of the form */
+.select-wrap select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 0.7rem 2.25rem 0.7rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.975rem;
+  color: var(--color-text);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.select-wrap select:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(58,111,216,0.12);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-muted);
+  pointer-events: none;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* ── Calculate Button ──────────────────────────────────── */
+/* CONTRAST: solid accent blue button is the most prominent interactive element */
+/* min-height 56px exceeds Apple's 44pt recommended touch target minimum */
+.calc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 56px;
+  padding: 0.75rem var(--space-lg);
+  background: var(--color-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.975rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: background 0.18s ease, transform 0.1s ease, box-shadow 0.18s ease;
+}
+
+.calc-btn:hover {
+  background: #2e5bb8;
+  box-shadow: 0 4px 14px rgba(58,111,216,0.40);
+}
+
+.calc-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(58,111,216,0.25);
+}
+
+/* ── Results Placeholder ───────────────────────────────── */
+.results-placeholder {
+  text-align: center;
+  padding: 2.5rem var(--space-md);
+  color: var(--color-muted);
+}
+
+.placeholder-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+  opacity: 0.4;
+}
+
+.results-placeholder p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* ── Results Grid — single column mobile ───────────────── */
+.results-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* PROXIMITY: paint items and flooring items each live in their own group box */
+.result-group {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* HIERARCHY: group title bar uses a light background to separate it from the rows below */
+.result-group-title {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ALIGNMENT: label and value sit on the same baseline row */
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: #ffffff;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-label {
+  font-size: 0.875rem;
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+/* CONTRAST: green pill makes the calculated value immediately readable */
+.result-value {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--color-success);
+  background: var(--color-success-lt);
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Site Footer ───────────────────────────────────────── */
+/* HIERARCHY: footer sits quietly at the bottom — subdued, not competing */
+.site-footer {
+  background: var(--color-primary);
+  color: rgba(255,255,255,0.5);
+  padding: 1rem var(--space-md);
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.footer-name {
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
+
+.footer-sep {
+  opacity: 0.3;
+}
+
+/* ── Accessibility ─────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+

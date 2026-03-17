@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Improvement Calculator</title>
+
+    <!-- Favicon / Home Screen Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="shortcut icon" href="icons/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Room Calc">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets in order per assignment -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/small.css">
+    <link rel="stylesheet" href="css/medium.css">
+    <link rel="stylesheet" href="css/large.css">
+</head>
+<body>
+
+    <!-- PAGE HEADER -->
+    <header class="site-header">
+        <div class="header-inner">
+            <span class="header-icon" aria-hidden="true">&#127968;</span>
+            <div class="header-text">
+                <h1>Home Improvement Calculator</h1>
+                <p class="header-tagline">Room measurements &amp; material estimates</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- User Entry Section -->
+        <section class="card entry-card">
+            <h2 class="section-heading">
+                <span class="step-badge">01</span> Room Details
+            </h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="roomWidth">Room Width</label>
+                    <div class="input-wrap">
+                        <input type="number" id="roomWidth" name="roomWidth" min="0" step="0.1" placeholder="0.0">
+                        <span class="unit">ft</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="roomDepth">Room Depth</label>
+                    <div class="input-wrap">
+                        <input type="number" id="roomDepth" name="roomDepth" min="0" step="0.1" placeholder="0.0">
+                        <span class="unit">ft</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="wallHeight">Wall Height</label>
+                    <div class="input-wrap">
+                        <input type="number" id="wallHeight" name="wallHeight" min="0" step="0.1" placeholder="0.0">
+                        <span class="unit">ft</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="paintQuality">Paint Quality</label>
+                    <div class="select-wrap">
+                        <select id="paintQuality" name="paintQuality">
+                            <option value="" selected disabled>Select a grade&hellip;</option>
+                            <option value="200">Economy Grade (200 sq ft/gal)</option>
+                            <option value="350">Standard Grade (350 sq ft/gal)</option>
+                            <option value="400">Premium Grade (400 sq ft/gal)</option>
+                        </select>
+                        <span class="select-arrow" aria-hidden="true">&#9662;</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="calc-btn" type="button" id="calcBtn">
+                &#9889; Calculate Materials
+            </button>
+
+        </section>
+
+        <!-- User Feedback Section -->
+        <section class="card results-card" id="resultsSection" aria-live="polite">
+            <h2 class="section-heading">
+                <span class="step-badge">02</span> Material Estimates
+            </h2>
+
+            <div class="results-placeholder" id="resultsPlaceholder">
+                <span class="placeholder-icon" aria-hidden="true">&#128210;</span>
+                <p>Enter your room dimensions above and tap <strong>Calculate Materials</strong> to see your estimates.</p>
+            </div>
+
+            <div class="results-grid" id="resultsGrid" hidden>
+
+                <div class="result-group">
+                    <h3 class="result-group-title">&#127912; Paint &amp; Primer</h3>
+                    <div class="result-item">
+                        <span class="result-label">Primer Required</span>
+                        <span class="result-value" id="primerResult">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Ceiling Paint</span>
+                        <span class="result-value" id="ceilingResult">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Wall Paint</span>
+                        <span class="result-value" id="wallPaintResult">-</span>
+                    </div>
+                </div>
+
+                <div class="result-group">
+                    <h3 class="result-group-title">&#127968; Flooring</h3>
+                    <div class="result-item">
+                        <span class="result-label">Carpet Required</span>
+                        <span class="result-value" id="carpetResult">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Tack Strip</span>
+                        <span class="result-value" id="tackResult">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Carpet Padding</span>
+                        <span class="result-value" id="paddingResult">-</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- PAGE FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="footer-name">Spencer Bishop</span>
+            <span class="footer-sep" aria-hidden="true">&middot;</span>
+            <span class="footer-assignment">Unit04 &mdash; Home Improvement Calculator</span>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
